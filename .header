@@ -1,1 +1,3 @@
+Server: Simple bash server
 Connection: close
+Cache-Control: no-store
