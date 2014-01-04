@@ -1,7 +1,5 @@
 #!/bin/bash
 
-RATELIMIT="0"
-VERBOSITY="5"
 
 header()
 {
@@ -10,7 +8,8 @@ header()
 	if [[ -n $1 ]]; then
 		local path="$1"
 		content_type="`file -i "$path" | sed -e 's/^[^:]*://'`"
-		#Make css work
+
+		#Make css work to replace text/plain with text/css
 		if [[ "$path" =~ \.css$ ]]; then
 			content_type="`echo $content_type | sed -e 's/plain/css/'`"
 		fi
@@ -96,7 +95,7 @@ if read line; then
 		   exit 3;;
 	esac
 else
-	echo -e "HTTP/1.1 400 Bad Request\r\n\r" 
+	echo -e "HTTP/1.1 400 Bad Request\r" 
 	header
 	log 2 "400: Empty request"
 	exit 1
